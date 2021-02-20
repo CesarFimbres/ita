@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="shortcut icon" href="img/logo.svg" type="image/x-icon" />
+
+		<!-- Font awesome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+			integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+			crossorigin="anonymous"
+		/>
+
+		<!-- CSS frameworks and CSS custom  -->
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/style.css" />
+
+		<title>ITA - Tienda en línea</title>
+	</head>
+
+	<body>
+		<div id="nav-container" class="sticky-top">
+			<nav
+				class="navbar navbar-expand-lg navbar-light bg-light box-shadow"
+			>
+				<a class="navbar-brand mr-md-5" href="index.html">
+					<div class="logo">
+						<img
+							alt="Logotipo de empresa"
+							style="height: 30px"
+							src="img/logo.svg"
+						/>
+						<span
+							style="
+								padding-left: 10px;
+								display: inline-block;
+								vertical-align: middle;
+								line-height: normal;
+								color: #d83933;
+								font-family: HelionW00-Regular;
+								font-size: 20px;
+								font-weight: lighter;
+							"
+						>
+							ITA-CSS</span
+						>
+					</div>
+				</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					class="collapse navbar-collapse"
+					id="navbarSupportedContent"
+				>
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="baja.html">Baja</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="media.html">Media</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="productos.html"
+								>Productos
+								<span class="sr-only">(current)</span></a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="contacto.html"
+								>Contacto</a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="nosotros.html"
+								>Quiénes somos</a
+							>
+						</li>
+						<!-- <li class="nav-item dropdown">
+							<a
+								class="nav-link dropdown-toggle"
+								href="#"
+								id="navbarDropdown"
+								role="button"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								Dropdown
+							</a>
+							<div
+								class="dropdown-menu"
+								aria-labelledby="navbarDropdown"
+							>
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#"
+									>Another action</a
+								>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"
+									>Something else here</a
+								>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#">Disabled</a>
+						</li> -->
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<input
+							class="form-control mr-sm-2"
+							type="search"
+							placeholder="Criterio de busqueda"
+							aria-label="Search"
+						/>
+						<button
+							class="btn btn-outline-danger my-2 my-sm-0"
+							type="submit"
+						>
+							Buscar
+						</button>
+					</form>
+				</div>
+			</nav>
+		</div>
+
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<div class="d-flex flex-row flex-wrap-reverse flex-lg-nowrap">
+					<div class="d-flex flex-column">
+						<h1 class="display-4 mt-5 mt-lg-0">
+							Catálogo de productos
+						</h1>
+						<p class="lead p-2">
+							Amplia selección de productos para satisfacer sus
+							necesidades eléctricas
+						</p>
+					</div>
+					<div class="mx-auto">
+						<img
+							src="img/catalogo-general.jpg"
+							class="image-cover"
+							alt="Contacto dibujo secretaria"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="listas" class="container mt-5 mb-5">
+			<!-- Sección de busquedas y tipo de listado de articulos -->
+			<div
+				class="d-flex flex-row flex-wrap-reverse flex-lg-nowrap justify-content-between"
+				role="toolbar"
+			>
+				<div class="input-group w-100 mr-0 mr-lg-5" id="buca-producto">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Buscar meterial eléctrico, código de producto o EAN "
+					/>
+					<div class="input-group-prepend">
+						<button
+							class="btn btn-outline-danger rounded"
+							id="busca-producto"
+						>
+							<i class="fas fa-search"></i>
+						</button>
+					</div>
+				</div>
+				<div
+					class="btn-group mb-2 mb-lg-0"
+					role="group"
+					aria-label="First group"
+				>
+					<button
+						type="button"
+						class="btn btn-outline-danger"
+						title="Ver como lista"
+						onclick="listViewer('productos-lista')"
+					>
+						<i class="fas fa-bars"></i>
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-danger"
+						title="Ver lista con imagenes"
+						onclick="listViewer('productos-lista-imagen')"
+					>
+						<i class="fas fa-th-list"></i>
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-danger"
+						title="Ver cuadrícula"
+						onclick="listViewer('productos-cuadricula')"
+					>
+						<i class="fas fa-th-large"></i>
+					</button>
+				</div>
+			</div>
+
+			<div id="app">
+				<!-- Mostrar mensaje de error problemas de conexion o registro no encontrado -->
+				<div class="alert alert-danger" v-if="errorMsg">
+					Error message
+				</div>
+				<div class="alert alert-success" v-if="successMsg">
+					Success message
+				</div>
+				<!-- Vista de productos por lista-detalle sin imagen -->
+				<div id="productos-lista" class="noCollapse mt-5">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr class="bg-danger text-light">
+									<th scope="col">ID</th>
+									<th scope="col">EAN</th>
+									<th scope="col">Producto</th>
+									<th scope="col">Descripción</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">2CDS251001R0104</th>
+									<td>4016779464208</td>
+									<td>S201-C10</td>
+									<td>
+										Interruptor automático - S200 - 1P - C -
+										10 ampere
+									</td>
+									<td>
+										<a
+											href="producto_detalle.html"
+											class="btn-image btn-information"
+											title="Detalle de prodcuto"
+										>
+											<i class="fas fa-info"></i>
+										</a>
+									</td>
+								</tr>
+								<!-- <tr>
+									<th scope="row">2CDS251001R0104</th>
+									<td>4016779464208</td>
+									<td>S201-C10</td>
+									<td>
+										Interruptor automático - S200 - 1P - C -
+										10 ampere
+									</td>
+									<td>
+										<a
+											href="producto_detalle.html"
+											class="btn-image btn-information"
+											title="Detalle de prodcuto"
+										>
+											<i class="fas fa-info"></i>
+										</a>
+									</td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Vista de productos por lista-detalle con imagen -->
+			<div id="productos-lista-imagen" class="collapse">
+				<div class="table-whit-images">
+					<div class="table-head">
+						<div class="table-row">
+							<div class="table-cell size-id">ID</div>
+							<div class="table-cell size-ean">EAN</div>
+							<div class="table-cell size-product">Producto</div>
+							<div class="table-cell size-description">
+								Descrpción
+							</div>
+							<div class="table-cell size-image">img</div>
+							<div class="table-cell size-buttons">Opciones</div>
+						</div>
+					</div>
+
+					<div class="table-body">
+						<div class="table-row">
+							<div class="table-cell size-id">
+								2CDS251001R0104
+							</div>
+							<div class="table-cell size-ean">4016779464208</div>
+							<div class="table-cell size-product">S201-C10</div>
+							<div class="table-cell size-description">
+								System pro M compact S200 miniature circuit
+								breakers are current limiting. They have two
+								different tripping mechanisms, the delayed
+								thermal tripping mechanism for overload
+								protection and the electromechanic tripping
+								mechanism for short circuit protection. They are
+								available in different characteristics
+								(B,C,D,K,Z), configurations
+								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
+								to 6 kA at 230/400 V AC) and rated currents (up
+								to 63A). All MCBs of the product range S200
+								comply with IEC/EN 60898-1, IEC/EN 60947-2,
+								UL1077 (for this code purchased in South America
+								there is no UL certificate), allowing the use
+								for residential, commercial and industrial
+								applications. Bottom-fitting auxiliary contact
+								can be mounted on S200 to save 50% space.
+							</div>
+							<div class="table-cell size-image">
+								<img
+									src="https://cdn.productimages.abb.com/9PAA00000003000_195x195.png"
+									width="125"
+									height="125"
+									alt="S201-C10"
+								/>
+							</div>
+							<div class="table-cell size-buttons">
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-information"
+									title="Detalle de prodcuto"
+								>
+									<i class="fas fa-info"></i>
+								</a>
+								<a
+									href="https://www.amazon.com.mx/shops/intecsa"
+									class="btn-image btn-amazon"
+									title="Amazon"
+								>
+									<i class="fab fa-amazon"></i>
+								</a>
+								<a
+									href="https://eshops.mercadolibre.com.mx/industrialconnect"
+									class="btn-image btn-mercado"
+									title="Mercado libre"
+								>
+									<img
+										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
+										width="35"
+										alt="Mercado libre"
+									/>
+								</a>
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-cart"
+									title="Carrito"
+								>
+									<i class="fas fa-cart-arrow-down"></i>
+								</a>
+							</div>
+						</div>
+						<div class="table-row">
+							<div class="table-cell size-id">
+								2CDS251001R0104
+							</div>
+							<div class="table-cell size-ean">4016779465700</div>
+							<div class="table-cell size-product">S202-C10</div>
+							<div class="table-cell size-description">
+								System pro M compact S200 miniature circuit
+								breakers are current limiting. They have two
+								different tripping mechanisms, the delayed
+								thermal tripping mechanism for overload
+								protection and the electromechanic tripping
+								mechanism for short circuit protection. They are
+								available in different characteristics
+								(B,C,D,K,Z), configurations
+								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
+								to 6 kA at 230/400 V AC) and rated currents (up
+								to 63A). All MCBs of the product range S200
+								comply with IEC/EN 60898-1, IEC/EN 60947-2,
+								UL1077 (for this code purchased in South America
+								there is no UL certificate), allowing the use
+								for residential, commercial and industrial
+								applications. Bottom-fitting auxiliary contact
+								can be mounted on S200 to save 50% space.
+							</div>
+							<div class="table-cell size-image">
+								<img
+									src="https://cdn.productimages.abb.com/9PAA00000008762_195x195.png"
+									width="125"
+									height="125"
+									alt="S201-C10"
+								/>
+							</div>
+							<div class="table-cell size-buttons">
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-information"
+									title="Detalle de prodcuto"
+								>
+									<i class="fas fa-info"></i>
+								</a>
+								<a
+									href="https://www.amazon.com.mx/shops/intecsa"
+									class="btn-image btn-amazon"
+									title="Amazon"
+								>
+									<i class="fab fa-amazon"></i>
+								</a>
+								<a
+									href="https://eshops.mercadolibre.com.mx/industrialconnect"
+									class="btn-image btn-mercado"
+									title="Mercado libre"
+								>
+									<img
+										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
+										width="35"
+										alt="Mercado libre"
+									/>
+								</a>
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-cart"
+									title="Carrito"
+								>
+									<i class="fas fa-cart-arrow-down"></i>
+								</a>
+							</div>
+						</div>
+						<div class="table-row">
+							<div class="table-cell size-id">
+								2CDS251001R0104
+							</div>
+							<div class="table-cell size-ean">4016779465700</div>
+							<div class="table-cell size-product">S203-C10</div>
+							<div class="table-cell size-description">
+								System pro M compact S200 miniature circuit
+								breakers are current limiting. They have two
+								different tripping mechanisms, the delayed
+								thermal tripping mechanism for overload
+								protection and the electromechanic tripping
+								mechanism for short circuit protection. They are
+								available in different characteristics
+								(B,C,D,K,Z), configurations
+								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
+								to 6 kA at 230/400 V AC) and rated currents (up
+								to 63A). All MCBs of the product range S200
+								comply with IEC/EN 60898-1, IEC/EN 60947-2,
+								UL1077 (for this code purchased in South America
+								there is no UL certificate), allowing the use
+								for residential, commercial and industrial
+								applications. Bottom-fitting auxiliary contact
+								can be mounted on S200 to save 50% space.
+							</div>
+							<div class="table-cell size-image">
+								<img
+									src="https://cdn.productimages.abb.com/9PAA00000008768_720x540.png"
+									width="125"
+									height="125"
+									alt="S201-C10"
+								/>
+							</div>
+							<div class="table-cell size-buttons">
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-information"
+									title="Detalle de prodcuto"
+								>
+									<i class="fas fa-info"></i>
+								</a>
+								<a
+									href="https://www.amazon.com.mx/shops/intecsa"
+									class="btn-image btn-amazon"
+									title="Amazon"
+								>
+									<i class="fab fa-amazon"></i>
+								</a>
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-mercado"
+									title="Mercado libre"
+								>
+									<img
+										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
+										width="35"
+										alt="Mercado libre"
+									/>
+								</a>
+								<a
+									href="producto_detalle.html"
+									class="btn-image btn-cart"
+									title="Carrito"
+								>
+									<i class="fas fa-cart-arrow-down"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Vista de productos por trajeta -->
+			<div id="productos-cuadricula" class="collapse">
+				<div class="d-flex flex-wrap justify-content-around">
+					<div class="card box-shadow mb-5" style="width: 16rem">
+						<img
+							class="card-img-top"
+							src="https://cdn.productimages.abb.com/9PAA00000003000_195x195.png"
+							alt="no image"
+						/>
+						<div class="card-body bg-gray-100">
+							<h5 class="card-title">S201-C10</h5>
+							<p class="card-text">
+								Interruptor automático - S200 - 1P - C - 10
+								ampere
+							</p>
+							<a
+								href="producto_detalle.html"
+								class="btn btn-primary btn-block"
+							>
+								<i class="fas fa-plus-circle"></i>
+								información
+							</a>
+						</div>
+					</div>
+					<div class="card box-shadow mb-5" style="width: 16rem">
+						<img
+							class="card-img-top"
+							src="https://cdn.productimages.abb.com/9PAA00000008762_720x540.png"
+							alt="no image"
+						/>
+						<div class="card-body bg-gray-100">
+							<h5 class="card-title">S202-C10</h5>
+							<p class="card-text">
+								Interruptor automático - S200 - 2P - C - 10
+								ampere
+							</p>
+							<a href="#" class="btn btn-primary btn-block">
+								<i class="fas fa-plus-circle"></i>
+								información
+							</a>
+						</div>
+					</div>
+					<div class="card box-shadow mb-5" style="width: 16rem">
+						<img
+							class="card-img-top"
+							src="https://cdn.productimages.abb.com/9PAA00000008768_720x540.png"
+							alt="no image"
+						/>
+						<div class="card-body bg-gray-100">
+							<h5 class="card-title">S203-C16</h5>
+							<p class="card-text">
+								Interruptor automático - S200 - 3P - C - 16
+								ampere
+							</p>
+							<a href="#" class="btn btn-primary btn-block">
+								<i class="fas fa-plus-circle"></i>
+								información
+							</a>
+						</div>
+					</div>
+					<div class="card box-shadow mb-5" style="width: 16rem">
+						<img
+							class="card-img-top"
+							src="https://cdn.productimages.abb.com/9PAA00000041009_720x540.png"
+							alt="no image"
+						/>
+						<div class="card-body bg-gray-100">
+							<h5 class="card-title">S204-C16</h5>
+							<p class="card-text">
+								Interruptor automático - S200 - 4P - C - 16
+								ampere
+							</p>
+							<a href="#" class="btn btn-primary btn-block">
+								<i class="fas fa-plus-circle"></i>
+								información
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Secciones de estado de productos
+			<section id="nuevos-en-caja">
+				<h4 class="display-4 mt-5 mb-4">Productos nuevos en caja</h4>
+			</section>
+			<hr />
+
+			<section id="nuevos-sin-caja">
+				<h4 class="display-4 mt-5 mb-4">Productos nuevos sin caja</h4>
+			</section>
+			<hr />
+
+			<section id="obsoletos">
+				<h4 class="display-4 mt-5 mb-4">Productos obsoletos</h4>
+			</section>
+			<hr />
+
+			<section id="usados">
+				<h4 class="display-4 mt-5 mb-4">Productos usados</h4>
+			</section> -->
+		</div>
+
+		<!-- Comentarios y precausiones COVID-19 de empresa responsable -->
+		<div id="modal-overlay">
+			<!-- Button trigger modal -->
+			<button
+				type="button"
+				class="btn btn-danger"
+				data-toggle="modal"
+				data-target="#exampleModalCenter"
+			>
+				Cuidate y cuida de los tuyos
+			</button>
+
+			<!-- Modal -->
+			<div
+				class="modal fade"
+				id="exampleModalCenter"
+				tabindex="-1"
+				role="dialog"
+				aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true"
+			>
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-danger">
+							<h5
+								class="modal-title text-light"
+								id="exampleModalLongTitle"
+							>
+								Toma las precauciones adecuadas e infórmate bien
+								para protegerte y cuidar de quienes te rodean.
+							</h5>
+							<button
+								type="button"
+								class="close"
+								data-dismiss="modal"
+								aria-label="Close"
+							>
+								<span class="text-light" aria-hidden="true"
+									>&times;</span
+								>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p class="lean">
+								Para evitar la propagación de COVID-19:
+							</p>
+							<ul class="ml-5">
+								<li>
+									Lavate las manos, usa agua y jabón o un
+									desinfectante de manos a base de alcohol.
+								</li>
+								<li>
+									Mantén una distancia de seguridad con
+									personas que tosan o estornuden.
+								</li>
+								<li>
+									No te toques los ojos, la nariz ni la boca.
+								</li>
+								<li>
+									Cuando tosas o estornudes, cúbrete la nariz
+									y la boca con el codo flexionado o con un
+									pañuelo.
+								</li>
+								<li>
+									Si no te encuentras bien, quédate en casa.
+								</li>
+								<li>
+									En caso de que tengas fiebre, tos o
+									dificultad para respirar, busca atención
+									médica.
+								</li>
+								<li>
+									Utiliza mascarilla cuando no sea posible
+									mantener el distanciamiento físico.
+								</li>
+							</ul>
+							<p>
+								Llama por teléfono antes de acudir a cualquier
+								proveedor de servicios sanitarios para que te
+								dirijan al centro médico adecuado. De esta
+								forma, te protegerás a ti y evitarás la
+								propagación de virus y otras infecciones.
+								Mascarillas Las mascarillas pueden ayudar a
+								prevenir que las personas que las llevan
+								propaguen el virus y lo contagien a otras
+								personas. Sin embargo, no protegen frente a
+								COVID-19 por sí solas, sino que deben combinarse
+								con el distanciamiento físico y la higiene de
+								manos. Sigue las recomendaciones de los
+								organismos de salud pública de tu zona.
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button
+								type="button"
+								class="btn btn-danger"
+								data-dismiss="modal"
+							>
+								Cerrar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="container-fluid bg-dark">
+			<div class="row">
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">Contacto</h5>
+					<p class="lead">
+						<i class="fas fa-phone mr-1"></i> teléfono: 55-5570-1197
+					</p>
+					<p class="lead">
+						<i class="fas fa-phone mr-1"></i> teléfono: 55-5259-2485
+					</p>
+
+					<p class="lead">
+						<i class="fas fa-mobile-alt mr-2"></i> movil:
+						55-4637-6328
+					</p>
+					<p class="lead">
+						<i class="far fa-envelope mr-1"></i> email:
+						contacto@grupointecsa.com
+					</p>
+					<p class="lead">
+						<i class="far fa-envelope mr-1"></i> email:
+						servicio@grupointecsa.com
+					</p>
+				</div>
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">Encuentranos</h5>
+					<iframe
+						class="google-map text-center"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.591168816403!2d-99.2261687856769!3d19.386847186910284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x98036d19714d1b13!2sGrupo%20Intecsa%20ITA!5e0!3m2!1ses-419!2smx!4v1612740279922!5m2!1ses-419!2smx"
+						width="95%"
+						height="100%"
+						frameborder="0"
+						style="border: 1px solid #dc3545"
+						allowfullscreen=""
+						aria-hidden="false"
+						tabindex="0"
+					></iframe>
+				</div>
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">
+						Siguenos en nuestras redes sociales
+					</h5>
+					<p class="lead text-center">
+						<a href="https://www.facebook.com/itamxoficial">
+							<i class="fab fa-facebook-square"></i> facebook
+						</a>
+					</p>
+					<p class="lead text-center">
+						<a href="https://www.instagram.com/itamxoficial/">
+							<i class="fab fa-instagram-square"></i> instagram
+						</a>
+					</p>
+					<p class="lead text-center">
+						<a href="https://www.youtube.com/user/idamultimedia">
+							<i class="fab fa-youtube"></i> youtube
+						</a>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- Information managment -->
+		<script src="js/vue.js"></script>
+		<script src="js/axios.js"></script>
+		<script src="js/app.js"></script>
+
+		<!-- Custom javascript functions -->
+		<script src="js/navbar.js"></script>
+		<script src="js/listview.js"></script>
+	</body>
+</html>

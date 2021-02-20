@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="shortcut icon" href="img/logo.svg" type="image/x-icon" />
+
+		<!-- Font awesome CDN -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+			integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+			crossorigin="anonymous"
+		/>
+
+		<!-- CSS frameworks and CSS custom  -->
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<link rel="stylesheet" href="css/style.css" />
+
+		<title>ITA - Productos en venta</title>
+	</head>
+
+	<body style="background-color: #ededed">
+		<div id="nav-container" class="sticky-top">
+			<nav
+				class="navbar navbar-expand-lg navbar-light bg-light box-shadow"
+			>
+				<a class="navbar-brand mr-md-5" href="index.html">
+					<div class="logo">
+						<img
+							alt="Logotipo de empresa"
+							style="height: 30px"
+							src="img/logo.svg"
+						/>
+						<span
+							style="
+								padding-left: 10px;
+								display: inline-block;
+								vertical-align: middle;
+								line-height: normal;
+								color: #d83933;
+								font-family: HelionW00-Regular;
+								font-size: 20px;
+								font-weight: lighter;
+							"
+						>
+							ITA-CSS</span
+						>
+					</div>
+				</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div
+					class="collapse navbar-collapse"
+					id="navbarSupportedContent"
+				>
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="baja.html">Baja</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="media.html">Media</a>
+						</li>
+						<li class="nav-item active">
+							<a class="nav-link" href="productos.html"
+								>Productos
+								<span class="sr-only">(current)</span></a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="contacto.html"
+								>Contacto</a
+							>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="nosotros.html"
+								>Quiénes somos</a
+							>
+						</li>
+						<!-- <li class="nav-item dropdown">
+							<a
+								class="nav-link dropdown-toggle"
+								href="#"
+								id="navbarDropdown"
+								role="button"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
+								Dropdown
+							</a>
+							<div
+								class="dropdown-menu"
+								aria-labelledby="navbarDropdown"
+							>
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#"
+									>Another action</a
+								>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#"
+									>Something else here</a
+								>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#">Disabled</a>
+						</li> -->
+					</ul>
+					<form class="form-inline my-2 my-lg-0">
+						<input
+							class="form-control mr-sm-2"
+							type="search"
+							placeholder="Criterio de busqueda"
+							aria-label="Search"
+						/>
+						<button
+							class="btn btn-outline-danger my-2 my-sm-0"
+							type="submit"
+						>
+							Buscar
+						</button>
+					</form>
+				</div>
+			</nav>
+		</div>
+
+		<div class="container box-shadow bg-light rounded mt-5 mb-5 pb-4">
+			<section id="productos-detalle">
+				<h4 class="display-4 mt-5 mb-4">Detalle de producto</h4>
+				<div class="d-flex flex-row flex-wrap-reverse flex-lg-nowrap">
+					<div class="mx-auto">
+						<img
+							src="https://cdn.productimages.abb.com/9PAA00000003000_720x540.png"
+							class="image-producto-detalle"
+							alt="Contacto dibujo secretaria"
+						/>
+					</div>
+					<div class="d-flex flex-column" id="producto-detalle">
+						<h3 class="mt-5 mt-lg-0 producto">
+							CS201-C10
+							<span class="badge badge-success">Nuevo</span>
+						</h3>
+						<h5 class="producto-nombre">2CDS251001R0104</h5>
+						<h2>$657.89</h2>
+						<p class="lead p-1 prodcuto-descCorta">
+							Interruptor automático - S200 - 1P - C - 10 ampere
+						</p>
+						<p class="lead producto-descLarga">
+							Los interruptores termomagnéticos en miniatura
+							System pro M compact S200 tienen limitación de
+							corriente. Tienen dos mecanismos de disparo
+							diferentes, el mecanismo de disparo térmico
+							retardado para protección contra sobrecargas y el
+							mecanismo de disparo electromecánico para protección
+							contra cortocircuitos. Están disponibles en
+							diferentes características (B, C, D, K, Z),
+							configuraciones (1P, 1P + N, 2P, 3P, 3P + N, 4P),
+							capacidades de corte (hasta 6 kA a 230/400 V AC ) y
+							corrientes nominales (hasta 63A). Todos los MCB de
+							la gama de productos S200 cumplen con IEC / EN
+							60898-1, IEC / EN 60947-2, UL1077 (para este código
+							comprado en Sudamérica no hay certificado UL), lo
+							que permite su uso para aplicaciones residenciales,
+							comerciales e industriales. El contacto auxiliar de
+							ajuste inferior se puede montar en el S200 para
+							ahorrar un 50% de espacio.
+						</p>
+						<hr />
+						<!-- Botones para hacer pedido de productos -->
+						<div id="producto-detalle-botonera" class="mt-4">
+							<a
+								href="https://articulo.mercadolibre.com.mx/MLM-859978222-abb-2cds211001r0204-interuptor-miniatura-sh200-1p-c-20a-_JM#position=48&type=item&tracking_id=0c9f73bf-87d1-4413-8526-9b0293aeb275"
+								class="btn btn-block btn-mercado mb-3"
+							>
+								<img
+									src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
+									width="35"
+									alt="Mercado libre"
+								/>
+								Comprar en Mercado Libre
+							</a>
+							<a
+								href="http://"
+								class="btn btn-block btn-amazon mb-3"
+							>
+								<i class="fab fa-amazon"></i> Comprar en
+								Amazon.com
+							</a>
+							<button class="btn btn-block btn-cart mb-2">
+								<i class="fas fa-cart-arrow-down"></i>
+								Agregar al carrito
+							</button>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<footer class="container-fluid bg-dark">
+			<div class="row">
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">Contacto</h5>
+					<p class="lead">
+						<i class="fas fa-phone mr-1"></i> teléfono: 55-5570-1197
+					</p>
+					<p class="lead">
+						<i class="fas fa-phone mr-1"></i> teléfono: 55-5259-2485
+					</p>
+
+					<p class="lead">
+						<i class="fas fa-mobile-alt mr-2"></i> movil:
+						55-4637-6328
+					</p>
+					<p class="lead">
+						<i class="far fa-envelope mr-1"></i> email:
+						contacto@grupointecsa.com
+					</p>
+					<p class="lead">
+						<i class="far fa-envelope mr-1"></i> email:
+						servicio@grupointecsa.com
+					</p>
+				</div>
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">Encuentranos</h5>
+					<iframe
+						class="google-map text-center"
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.591168816403!2d-99.2261687856769!3d19.386847186910284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x98036d19714d1b13!2sGrupo%20Intecsa%20ITA!5e0!3m2!1ses-419!2smx!4v1612740279922!5m2!1ses-419!2smx"
+						width="95%"
+						height="100%"
+						frameborder="0"
+						style="border: 1px solid #dc3545"
+						allowfullscreen=""
+						aria-hidden="false"
+						tabindex="0"
+					></iframe>
+				</div>
+				<div class="col-md-4 bg-dark text-light p-5">
+					<h5 class="text-center">
+						Siguenos en nuestras redes sociales
+					</h5>
+					<p class="lead text-center">
+						<a href="https://www.facebook.com/itamxoficial">
+							<i class="fab fa-facebook-square"></i> facebook
+						</a>
+					</p>
+					<p class="lead text-center">
+						<a href="https://www.instagram.com/itamxoficial/">
+							<i class="fab fa-instagram-square"></i> instagram
+						</a>
+					</p>
+					<p class="lead text-center">
+						<a href="https://www.youtube.com/user/idamultimedia">
+							<i class="fab fa-youtube"></i> youtube
+						</a>
+					</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"
+		></script>
+
+		<!-- Custom javascript functions -->
+		<script src="js/navbar.js"></script>
+	</body>
+</html>
