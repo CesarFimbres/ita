@@ -1,4 +1,4 @@
-const url = 'db/dbTrans.php';
+const url = 'db/crud.php';
 
 var app = new Vue({
 	el: '#app',
@@ -9,35 +9,41 @@ var app = new Vue({
 		users: null,
 		lastUser: null,
 		newUser: {},
-		currentUser: { id: '-' },
 		members: [],
-		search: { keyword: '' },
+		search: { product: '' },
 		noMember: false,
 	},
 	mounted() {
 		this.fetchMembers();
 	},
 	methods: {
-		searchMonitor() {
-			var keyword = this.toData(this.search);
-			axios
-				.post('dbTrans.php?action=search', keyword)
-				.then(function (response) {
-					app.members = response.data.members;
-					if (response.data.members == '') {
-						app.noMember = true;
-					} else {
-						app.noMember = false;
-					}
-				});
+		searchProduct() {
+			let axiosParams = { option: 'buscar', busca: this.search.product };
+			axios.post('db/crud.php', axiosParams).then((response) => {
+				this.members = response.data;
+				if (response.data == '') {
+					this.noMember = true;
+				} else {
+					this.noMember = false;
+				}
+			});
+			document.getElementById('busca-producto').focus();
 		},
 
 		fetchMembers() {
-			axios.post('dbTrans.php?action=show').then(function (response) {
-				app.members = response.data.members;
-			});
+			let axiosParams = { option: 'listar' };
+			axios
+				.post('db/crud.php', axiosParams)
+				.then((response) => {
+					this.members = response.data;
+				})
+				.catch((e) => {
+					this.noMember = true;
+					console.log(e);
+				});
 		},
 
+		/*  addUser updateUser deleteUser
 		addUser() {
 			var vData = this.toData(this.currentUser);
 			axios
@@ -91,41 +97,25 @@ var app = new Vue({
 					console.log(e);
 				});
 		},
+		*/
 
-		toData(obj) {
-			var fd = new FormData();
-			for (var i in obj) {
-				fd.append(i, obj[i]);
-			}
-			return fd;
-		},
-
-		selectUser(user) {
-			this.currentUser = user;
-			// Asignar el id de tablero seleccionado
-			sessionStorage.setItem('idTablero', user.id);
+		selectProduct(producto) {
+			// Asignar el id de producto seleccionado
+			this.currentProducto = producto;
+			sessionStorage.setItem('nombreProducto', producto.nombre);
+			console.log('Variable de session nombreProducto');
+			console.log(sessionStorage.getItem('nombreProducto'));
 		},
 
 		newReg() {
-			this.currentUser.id = '-';
-			this.currentUser.cliente = '';
-			this.currentUser.proyecto = '';
-			this.currentUser.nombre = '';
-			this.currentUser.fecha = '';
-			this.currentUser.sistema = '';
-			this.currentUser.voltaje = '';
-			this.currentUser.unifilar = '';
-			this.currentUser.layout = '';
-			this.currentUser.material = '';
-			this.currentUser.metrel = '';
-			this.currentUser.comentario = '';
-			this.currentUser.sttablero = 'NO ESPECIFICADO';
-			this.currentUser.stinspeccion = 'NO ESPECIFICADO';
-			this.currentUser.stcontinuidad = 'NO ESPECIFICADO';
-			this.currentUser.stresistencia = 'NO ESPECIFICADO';
-			this.currentUser.sthipot = 'NO ESPECIFICADO';
+			this.currentProducto.id = '-';
+			this.currentProducto.producto = '';
+			this.currentProducto.nombre = '';
+			this.currentProducto.ean = '';
+			this.currentProducto.desCorta = '';
+			this.currentProducto.imgCorta = '';
 			this.successMsg = false;
-			document.getElementById('v01').focus();
+			document.getElementById('busca-producto').focus();
 		},
 	},
 });

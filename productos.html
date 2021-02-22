@@ -162,67 +162,72 @@
 			</div>
 		</div>
 
-		<div id="listas" class="container mt-5 mb-5">
-			<!-- Sección de busquedas y tipo de listado de articulos -->
-			<div
-				class="d-flex flex-row flex-wrap-reverse flex-lg-nowrap justify-content-between"
-				role="toolbar"
-			>
-				<div class="input-group w-100 mr-0 mr-lg-5" id="buca-producto">
-					<input
-						type="text"
-						class="form-control"
-						placeholder="Buscar meterial eléctrico, código de producto o EAN "
-					/>
-					<div class="input-group-prepend">
-						<button
-							class="btn btn-outline-danger rounded"
+		<div id="app">
+			<div id="listas" class="container mt-5 mb-5">
+				<!-- Sección de busquedas y tipo de listado de articulos -->
+				<div
+					class="d-flex flex-row flex-wrap-reverse flex-lg-nowrap justify-content-between"
+					role="toolbar"
+				>
+					<div class="input-group w-100 mr-0 mr-lg-5">
+						<input
 							id="busca-producto"
+							class="form-control"
+							type="text"
+							placeholder="Buscar meterial eléctrico, código de producto o EAN "
+							v-on:keyup.13="searchProduct"
+							v-model="search.product"
+						/>
+						<div class="input-group-prepend">
+							<button
+								class="btn btn-outline-danger rounded"
+								v-on:click="searchProduct"
+							>
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+					<div
+						class="btn-group mb-2 mb-lg-0"
+						role="group"
+						aria-label="First group"
+					>
+						<button
+							type="button"
+							class="btn btn-outline-danger"
+							title="Ver como lista"
+							onclick="listViewer('productos-lista')"
 						>
-							<i class="fas fa-search"></i>
+							<i class="fas fa-bars"></i>
+						</button>
+						<button
+							type="button"
+							class="btn btn-outline-danger"
+							title="Ver lista con imagenes"
+							onclick="listViewer('productos-lista-imagen')"
+						>
+							<i class="fas fa-th-list"></i>
+						</button>
+						<button
+							type="button"
+							class="btn btn-outline-danger"
+							title="Ver cuadrícula"
+							onclick="listViewer('productos-cuadricula')"
+						>
+							<i class="fas fa-th-large"></i>
 						</button>
 					</div>
 				</div>
-				<div
-					class="btn-group mb-2 mb-lg-0"
-					role="group"
-					aria-label="First group"
-				>
-					<button
-						type="button"
-						class="btn btn-outline-danger"
-						title="Ver como lista"
-						onclick="listViewer('productos-lista')"
-					>
-						<i class="fas fa-bars"></i>
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-danger"
-						title="Ver lista con imagenes"
-						onclick="listViewer('productos-lista-imagen')"
-					>
-						<i class="fas fa-th-list"></i>
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-danger"
-						title="Ver cuadrícula"
-						onclick="listViewer('productos-cuadricula')"
-					>
-						<i class="fas fa-th-large"></i>
-					</button>
-				</div>
-			</div>
 
-			<div id="app">
-				<!-- Mostrar mensaje de error problemas de conexion o registro no encontrado -->
+				<!--  Mensages de error o exito de eventos personalizado 
 				<div class="alert alert-danger" v-if="errorMsg">
 					Error message
 				</div>
 				<div class="alert alert-success" v-if="successMsg">
 					Success message
-				</div>
+				</div> 
+				-->
+
 				<!-- Vista de productos por lista-detalle sin imagen -->
 				<div id="productos-lista" class="noCollapse mt-5">
 					<div class="table-responsive">
@@ -237,14 +242,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">2CDS251001R0104</th>
-									<td>4016779464208</td>
-									<td>S201-C10</td>
-									<td>
-										Interruptor automático - S200 - 1P - C -
-										10 ampere
+								<tr v-if="noMember">
+									<td colspan="5" align="center">
+										Criterio de busqueda invalido
 									</td>
+								</tr>
+
+								<tr
+									v-for="member in members"
+									@click="successMsg=false; errorMsg=false; selectProduct(member)"
+								>
+									<th scope="row">{{ member.nombre }}</th>
+									<td>{{ member.ean }}</td>
+									<td>{{ member.producto }}</td>
+									<td>{{ member.desCorta }}</td>
 									<td>
 										<a
 											href="producto_detalle.html"
@@ -255,336 +266,129 @@
 										</a>
 									</td>
 								</tr>
-								<!-- <tr>
-									<th scope="row">2CDS251001R0104</th>
-									<td>4016779464208</td>
-									<td>S201-C10</td>
-									<td>
-										Interruptor automático - S200 - 1P - C -
-										10 ampere
-									</td>
-									<td>
-										<a
-											href="producto_detalle.html"
-											class="btn-image btn-information"
-											title="Detalle de prodcuto"
-										>
-											<i class="fas fa-info"></i>
-										</a>
-									</td>
-								</tr> -->
 							</tbody>
 						</table>
 					</div>
 				</div>
-			</div>
 
-			<!-- Vista de productos por lista-detalle con imagen -->
-			<div id="productos-lista-imagen" class="collapse">
-				<div class="table-whit-images">
-					<div class="table-head">
-						<div class="table-row">
-							<div class="table-cell size-id">ID</div>
-							<div class="table-cell size-ean">EAN</div>
-							<div class="table-cell size-product">Producto</div>
-							<div class="table-cell size-description">
-								Descrpción
+				<!-- Vista de productos por lista-detalle con imagen -->
+				<div id="productos-lista-imagen" class="collapse">
+					<div class="table-whit-images">
+						<div class="table-head">
+							<div class="table-row">
+								<div class="table-cell size-id">ID</div>
+								<div class="table-cell size-ean">EAN</div>
+								<div class="table-cell size-product">
+									Producto
+								</div>
+								<div class="table-cell size-description">
+									Descrpción
+								</div>
+								<div class="table-cell size-image">img</div>
+								<div class="table-cell size-buttons">
+									Opciones
+								</div>
 							</div>
-							<div class="table-cell size-image">img</div>
-							<div class="table-cell size-buttons">Opciones</div>
 						</div>
-					</div>
 
-					<div class="table-body">
-						<div class="table-row">
-							<div class="table-cell size-id">
-								2CDS251001R0104
-							</div>
-							<div class="table-cell size-ean">4016779464208</div>
-							<div class="table-cell size-product">S201-C10</div>
-							<div class="table-cell size-description">
-								System pro M compact S200 miniature circuit
-								breakers are current limiting. They have two
-								different tripping mechanisms, the delayed
-								thermal tripping mechanism for overload
-								protection and the electromechanic tripping
-								mechanism for short circuit protection. They are
-								available in different characteristics
-								(B,C,D,K,Z), configurations
-								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
-								to 6 kA at 230/400 V AC) and rated currents (up
-								to 63A). All MCBs of the product range S200
-								comply with IEC/EN 60898-1, IEC/EN 60947-2,
-								UL1077 (for this code purchased in South America
-								there is no UL certificate), allowing the use
-								for residential, commercial and industrial
-								applications. Bottom-fitting auxiliary contact
-								can be mounted on S200 to save 50% space.
-							</div>
-							<div class="table-cell size-image">
-								<img
-									src="https://cdn.productimages.abb.com/9PAA00000003000_195x195.png"
-									width="125"
-									height="125"
-									alt="S201-C10"
-								/>
-							</div>
-							<div class="table-cell size-buttons">
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-information"
-									title="Detalle de prodcuto"
-								>
-									<i class="fas fa-info"></i>
-								</a>
-								<a
-									href="https://www.amazon.com.mx/shops/intecsa"
-									class="btn-image btn-amazon"
-									title="Amazon"
-								>
-									<i class="fab fa-amazon"></i>
-								</a>
-								<a
-									href="https://eshops.mercadolibre.com.mx/industrialconnect"
-									class="btn-image btn-mercado"
-									title="Mercado libre"
-								>
-									<img
-										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
-										width="35"
-										alt="Mercado libre"
-									/>
-								</a>
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-cart"
-									title="Carrito"
-								>
-									<i class="fas fa-cart-arrow-down"></i>
-								</a>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="table-cell size-id">
-								2CDS251001R0104
-							</div>
-							<div class="table-cell size-ean">4016779465700</div>
-							<div class="table-cell size-product">S202-C10</div>
-							<div class="table-cell size-description">
-								System pro M compact S200 miniature circuit
-								breakers are current limiting. They have two
-								different tripping mechanisms, the delayed
-								thermal tripping mechanism for overload
-								protection and the electromechanic tripping
-								mechanism for short circuit protection. They are
-								available in different characteristics
-								(B,C,D,K,Z), configurations
-								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
-								to 6 kA at 230/400 V AC) and rated currents (up
-								to 63A). All MCBs of the product range S200
-								comply with IEC/EN 60898-1, IEC/EN 60947-2,
-								UL1077 (for this code purchased in South America
-								there is no UL certificate), allowing the use
-								for residential, commercial and industrial
-								applications. Bottom-fitting auxiliary contact
-								can be mounted on S200 to save 50% space.
-							</div>
-							<div class="table-cell size-image">
-								<img
-									src="https://cdn.productimages.abb.com/9PAA00000008762_195x195.png"
-									width="125"
-									height="125"
-									alt="S201-C10"
-								/>
-							</div>
-							<div class="table-cell size-buttons">
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-information"
-									title="Detalle de prodcuto"
-								>
-									<i class="fas fa-info"></i>
-								</a>
-								<a
-									href="https://www.amazon.com.mx/shops/intecsa"
-									class="btn-image btn-amazon"
-									title="Amazon"
-								>
-									<i class="fab fa-amazon"></i>
-								</a>
-								<a
-									href="https://eshops.mercadolibre.com.mx/industrialconnect"
-									class="btn-image btn-mercado"
-									title="Mercado libre"
-								>
-									<img
-										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
-										width="35"
-										alt="Mercado libre"
-									/>
-								</a>
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-cart"
-									title="Carrito"
-								>
-									<i class="fas fa-cart-arrow-down"></i>
-								</a>
-							</div>
-						</div>
-						<div class="table-row">
-							<div class="table-cell size-id">
-								2CDS251001R0104
-							</div>
-							<div class="table-cell size-ean">4016779465700</div>
-							<div class="table-cell size-product">S203-C10</div>
-							<div class="table-cell size-description">
-								System pro M compact S200 miniature circuit
-								breakers are current limiting. They have two
-								different tripping mechanisms, the delayed
-								thermal tripping mechanism for overload
-								protection and the electromechanic tripping
-								mechanism for short circuit protection. They are
-								available in different characteristics
-								(B,C,D,K,Z), configurations
-								(1P,1P+N,2P,3P,3P+N,4P), breaking capacities (up
-								to 6 kA at 230/400 V AC) and rated currents (up
-								to 63A). All MCBs of the product range S200
-								comply with IEC/EN 60898-1, IEC/EN 60947-2,
-								UL1077 (for this code purchased in South America
-								there is no UL certificate), allowing the use
-								for residential, commercial and industrial
-								applications. Bottom-fitting auxiliary contact
-								can be mounted on S200 to save 50% space.
-							</div>
-							<div class="table-cell size-image">
-								<img
-									src="https://cdn.productimages.abb.com/9PAA00000008768_720x540.png"
-									width="125"
-									height="125"
-									alt="S201-C10"
-								/>
-							</div>
-							<div class="table-cell size-buttons">
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-information"
-									title="Detalle de prodcuto"
-								>
-									<i class="fas fa-info"></i>
-								</a>
-								<a
-									href="https://www.amazon.com.mx/shops/intecsa"
-									class="btn-image btn-amazon"
-									title="Amazon"
-								>
-									<i class="fab fa-amazon"></i>
-								</a>
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-mercado"
-									title="Mercado libre"
-								>
-									<img
-										src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
-										width="35"
-										alt="Mercado libre"
-									/>
-								</a>
-								<a
-									href="producto_detalle.html"
-									class="btn-image btn-cart"
-									title="Carrito"
-								>
-									<i class="fas fa-cart-arrow-down"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- Vista de productos por trajeta -->
-			<div id="productos-cuadricula" class="collapse">
-				<div class="d-flex flex-wrap justify-content-around">
-					<div class="card box-shadow mb-5" style="width: 16rem">
-						<img
-							class="card-img-top"
-							src="https://cdn.productimages.abb.com/9PAA00000003000_195x195.png"
-							alt="no image"
-						/>
-						<div class="card-body bg-gray-100">
-							<h5 class="card-title">S201-C10</h5>
-							<p class="card-text">
-								Interruptor automático - S200 - 1P - C - 10
-								ampere
-							</p>
-							<a
-								href="producto_detalle.html"
-								class="btn btn-primary btn-block"
+						<div class="table-body">
+							<div
+								class="table-row"
+								v-for="member in members"
+								@click="successMsg=false; errorMsg=false; selectProduct(member)"
 							>
-								<i class="fas fa-plus-circle"></i>
-								información
-							</a>
+								<div class="table-cell size-id">
+									{{ member.nombre }}
+								</div>
+								<div class="table-cell size-ean">
+									{{ member.ean }}
+								</div>
+								<div class="table-cell size-product">
+									{{ member.producto }}
+								</div>
+								<div class="table-cell size-description">
+									{{ member.descLarga }}
+								</div>
+								<div class="table-cell size-image">
+									<img
+										:src="member.imgCorta"
+										:alt="member.nombre"
+										width="125"
+										height="125"
+									/>
+								</div>
+								<div class="table-cell size-buttons">
+									<a
+										href="producto_detalle.html"
+										class="btn-image btn-information"
+										title="Detalle de prodcuto"
+									>
+										<i class="fas fa-info"></i>
+									</a>
+									<a
+										href="https://www.amazon.com.mx/shops/intecsa"
+										class="btn-image btn-amazon"
+										title="Amazon"
+									>
+										<i class="fab fa-amazon"></i>
+									</a>
+									<a
+										href="https://eshops.mercadolibre.com.mx/industrialconnect"
+										class="btn-image btn-mercado"
+										title="Mercado libre"
+									>
+										<img
+											src="https://http2.mlstatic.com/frontend-assets/ui-navigation/5.12.1/mercadolibre/logo__small.png"
+											width="35"
+											alt="Mercado libre"
+										/>
+									</a>
+									<a
+										href="producto_detalle.html"
+										class="btn-image btn-cart"
+										title="Carrito"
+									>
+										<i class="fas fa-cart-arrow-down"></i>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="card box-shadow mb-5" style="width: 16rem">
-						<img
-							class="card-img-top"
-							src="https://cdn.productimages.abb.com/9PAA00000008762_720x540.png"
-							alt="no image"
-						/>
-						<div class="card-body bg-gray-100">
-							<h5 class="card-title">S202-C10</h5>
-							<p class="card-text">
-								Interruptor automático - S200 - 2P - C - 10
-								ampere
-							</p>
-							<a href="#" class="btn btn-primary btn-block">
-								<i class="fas fa-plus-circle"></i>
-								información
-							</a>
-						</div>
-					</div>
-					<div class="card box-shadow mb-5" style="width: 16rem">
-						<img
-							class="card-img-top"
-							src="https://cdn.productimages.abb.com/9PAA00000008768_720x540.png"
-							alt="no image"
-						/>
-						<div class="card-body bg-gray-100">
-							<h5 class="card-title">S203-C16</h5>
-							<p class="card-text">
-								Interruptor automático - S200 - 3P - C - 16
-								ampere
-							</p>
-							<a href="#" class="btn btn-primary btn-block">
-								<i class="fas fa-plus-circle"></i>
-								información
-							</a>
-						</div>
-					</div>
-					<div class="card box-shadow mb-5" style="width: 16rem">
-						<img
-							class="card-img-top"
-							src="https://cdn.productimages.abb.com/9PAA00000041009_720x540.png"
-							alt="no image"
-						/>
-						<div class="card-body bg-gray-100">
-							<h5 class="card-title">S204-C16</h5>
-							<p class="card-text">
-								Interruptor automático - S200 - 4P - C - 16
-								ampere
-							</p>
-							<a href="#" class="btn btn-primary btn-block">
-								<i class="fas fa-plus-circle"></i>
-								información
-							</a>
+				</div>
+
+				<!-- Vista de productos por trajeta -->
+				<div id="productos-cuadricula" class="collapse">
+					<div class="d-flex flex-wrap justify-content-around">
+						<div
+							class="card box-shadow mb-5"
+							style="width: 16rem"
+							v-for="member in members"
+							@click="successMsg=false; errorMsg=false; selectProduct(member)"
+						>
+							<img
+								class="card-img-top"
+								:src="member.imgCorta"
+								:alt="member.nombre"
+								height="180"
+								width="286"
+							/>
+							<div class="card-body bg-gray-100">
+								<h5 class="card-title">
+									{{ member.producto }}
+								</h5>
+								<p class="card-text">{{ member.desCorta }}</p>
+								<a
+									href="producto_detalle.html"
+									class="btn btn-primary btn-block"
+								>
+									<i class="fas fa-plus-circle"></i>
+									información
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<!-- Secciones de estado de productos
 			<section id="nuevos-en-caja">
 				<h4 class="display-4 mt-5 mb-4">Productos nuevos en caja</h4>
@@ -791,8 +595,11 @@
 		></script>
 
 		<!-- Information managment -->
-		<script src="js/vue.js"></script>
+		<!-- <script src="js/vue.js"></script>
 		<script src="js/axios.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
 		<script src="js/app.js"></script>
 
 		<!-- Custom javascript functions -->
