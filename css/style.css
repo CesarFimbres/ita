@@ -7,6 +7,10 @@
 	outline: none;
 }
 
+body {
+	font-size: 16px;
+}
+
 .bg-gray-100 {
 	background-color: #eee;
 }
@@ -82,40 +86,145 @@
 	color: #dc3545;
 }
 
-/* ! -----  indice.html */
-
-#hero .row-hero {
-	height: 100%;
+.grow {
+	transition: all 0.3s ease-in-out;
+}
+.grow:hover {
+	transform: scale(1.1);
 }
 
-#hero .hero-text {
-	opacity: 0;
-}
+/* ! -----  index.html */
 
-#hero .hero-image {
+.market-container {
 	display: flex;
-	flex-flow: column nowrap;
+	flex-direction: column;
+	align-items: center;
+}
+
+.market {
+	width: 95%;
+	max-width: 1280px;
+	display: grid;
+	grid-gap: 10px;
+	grid-template-areas:
+		'market-item market-item market-promo1'
+		'market-item market-item market-promo2';
+	align-content: center;
+}
+
+.market-ecomerce {
+	width: 95%;
+	max-width: 1280px;
+	display: grid;
+	grid-gap: 20px;
+	grid-template-areas: 'market-mercado market-amazon market-ita';
+	align-content: center;
+}
+
+.market-item {
+	height: auto;
+	grid-area: market-item;
+}
+
+.market-promo1 {
+	grid-area: market-promo1;
+	border: 2px solid #ed8f03 !important;
+}
+
+.market-promo2 {
+	grid-area: market-promo2;
+	background: linear-gradient(to top, #757f9a, #d7dde8) !important;
+	border: 2px solid #757f9a !important;
+}
+
+.market-mercado {
+	grid-area: market-mercado;
+	padding: 5px;
+	background: #fff159 !important;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* background-color: #eee; */
-	opacity: 0;
 }
 
-#hero .hero-icon {
-	color: #333;
-	font-size: 18em;
+.market-amazon {
+	grid-area: market-amazon;
+	padding: 5px;
+	background: #233448 !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.card .card-img-top {
-	height: 180px;
-	width: 286px;
-	object-fit: none;
+.market-ita {
+	grid-area: market-ita;
+	padding: 5px;
+	background: #fff !important;
+	border: 2px solid #393f74 !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-.image-cover {
-	width: 600px;
-	height: 280px;
-	object-fit: cover;
+.market-main {
+	grid-area: market-main;
+}
+
+.market-item,
+.market-promo1,
+.market-promo2,
+.market-mercado,
+.market-amazon,
+.market-ita {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+}
+.market-discount {
+	padding: 7px;
+	background: #dc3545;
+	color: #fff;
+	font-size: 1.5em;
+	font-weight: bold;
+	border-radius: 0 20px 20px 0;
+	position: relative;
+	top: 5%;
+	left: -25%;
+}
+.promotion_image {
+	height: auto;
+	object-fit: contain;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.promotion-description {
+	padding: 3px;
+	color: #555;
+	font-size: 1em;
+	font-weight: bold;
+	font-style: italic;
+	position: relative;
+}
+
+.carousel-image {
+	width: 650px;
+	height: auto;
+	object-fit: contain;
+}
+
+.carousel-caption {
+	background: rgba(0, 0, 0, 0.075) !important;
+	padding: 0 10px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	backdrop-filter: blur(20);
+}
+
+.carousel-caption h1 {
+	color: #4875b4;
+	text-shadow: 2px 2px 1px #eee;
 }
 
 /* ! baja.html y media. */
@@ -362,6 +471,38 @@ div #productos-cuadricula {
 		border-radius: 0;
 	}
 
+	.display-4 {
+		font-size: 3em;
+	}
+
+	.market {
+		width: 95%;
+		max-width: 1280px;
+		display: grid;
+		grid-gap: 5px;
+		grid-template-areas:
+			'market-item market-item market-item'
+			'market-promo1 market-promo1 market-promo1'
+			'market-promo2 market-promo2 market-promo2'
+			'market-mercado market-amazon market-ita';
+		align-content: center;
+	}
+
+	.market-ecomerce {
+		grid-gap: 5px;
+		grid-template-areas:
+			'market-ita'
+			'market-mercado'
+			'market-amazon';
+		align-content: center;
+	}
+
+	.carousel-image {
+		width: 90%;
+		height: auto;
+		object-fit: contain;
+	}
+
 	.image-cover {
 		height: auto;
 		width: 90vw;
@@ -447,13 +588,18 @@ div #productos-cuadricula {
 		align-items: flex-start;
 	}
 
+	.hero-baja {
+		height: 90vh;
+		margin: 0;
+	}
+	/* 
 	.hero-baja .left-baja .display-4 {
 		font-size: 48px !important;
 	}
 
 	.hero-baja .left-baja .lead {
 		font-size: 16px !important;
-	}
+	} */
 
 	.hero-baja .right-baja .hero-image img {
 		width: 350px;

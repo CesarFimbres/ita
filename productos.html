@@ -315,6 +315,7 @@
 										:alt="member.nombre"
 										width="125"
 										height="125"
+										loading="lazy"
 									/>
 								</div>
 								<div class="table-cell size-buttons">
@@ -360,7 +361,7 @@
 				<div id="productos-cuadricula" class="collapse">
 					<div class="d-flex flex-wrap justify-content-around">
 						<div
-							class="card box-shadow mb-5"
+							class="card box-shadow mb-5 grow"
 							style="width: 16rem"
 							v-for="member in members"
 							@click="successMsg=false; errorMsg=false; selectProduct(member)"
@@ -371,6 +372,7 @@
 								:alt="member.nombre"
 								height="180"
 								width="286"
+								loading="lazy"
 							/>
 							<div class="card-body bg-gray-100">
 								<h5 class="card-title">
@@ -552,6 +554,7 @@
 						allowfullscreen=""
 						aria-hidden="false"
 						tabindex="0"
+						loading="lazy"
 					></iframe>
 				</div>
 				<div class="col-md-4 bg-dark text-light p-5">
