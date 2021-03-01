@@ -93,6 +93,10 @@ body {
 	transform: scale(1.1);
 }
 
+.image-contain {
+	object-fit: contain;
+}
+
 /* ! -----  index.html */
 
 .market-container {
@@ -107,8 +111,8 @@ body {
 	display: grid;
 	grid-gap: 10px;
 	grid-template-areas:
-		'market-item market-item market-promo1'
-		'market-item market-item market-promo2';
+		"market-item market-item market-promo1"
+		"market-item market-item market-promo2";
 	align-content: center;
 }
 
@@ -117,30 +121,33 @@ body {
 	max-width: 1280px;
 	display: grid;
 	grid-gap: 20px;
-	grid-template-areas: 'market-mercado market-amazon market-ita';
+	grid-template-areas: "market-mercado market-ita";
 	align-content: center;
 }
 
 .market-item {
 	height: auto;
 	grid-area: market-item;
+	border: 2px solid #66a6ff !important;
 }
 
 .market-promo1 {
 	grid-area: market-promo1;
-	border: 2px solid #ed8f03 !important;
+	border: 2px solid #66a6ff !important;
 }
 
 .market-promo2 {
 	grid-area: market-promo2;
-	background: linear-gradient(to top, #757f9a, #d7dde8) !important;
-	border: 2px solid #757f9a !important;
+	background-image: linear-gradient(120deg, #89f7fe, #66a6ff) !important;
+	border: 2px solid #66a6ff !important;
 }
 
 .market-mercado {
 	grid-area: market-mercado;
 	padding: 5px;
-	background: #fff159 !important;
+	background: #fdf493 !important;
+	border: 2px solid #f7df03 !important;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -159,7 +166,7 @@ body {
 	grid-area: market-ita;
 	padding: 5px;
 	background: #fff !important;
-	border: 2px solid #393f74 !important;
+	border: 2px solid #66a6ff !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -481,19 +488,18 @@ div #productos-cuadricula {
 		display: grid;
 		grid-gap: 5px;
 		grid-template-areas:
-			'market-item market-item market-item'
-			'market-promo1 market-promo1 market-promo1'
-			'market-promo2 market-promo2 market-promo2'
-			'market-mercado market-amazon market-ita';
+			"market-item market-item market-item"
+			"market-promo1 market-promo1 market-promo1"
+			"market-promo2 market-promo2 market-promo2"
+			"market-mercado market-amazon market-ita";
 		align-content: center;
 	}
 
 	.market-ecomerce {
 		grid-gap: 5px;
 		grid-template-areas:
-			'market-ita'
-			'market-mercado'
-			'market-amazon';
+			"market-ita"
+			"market-amazon";
 		align-content: center;
 	}
 
